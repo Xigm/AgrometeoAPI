@@ -52,8 +52,12 @@ class AgrometeoAPIClient:
             Dict containing the JSON response
             
         Raises:
+            ValueError: If endpoint is empty
             requests.exceptions.RequestException: If the request fails
         """
+        if not endpoint.strip():
+            raise ValueError('Endpoint cannot be empty')
+        
         url = f"{self.base_url.rstrip('/')}/{endpoint.lstrip('/')}"
         
         response = self.session.request(

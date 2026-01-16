@@ -28,18 +28,17 @@ class Config:
         self.timeout: int = int(os.getenv('TIMEOUT', '30'))
         self.debug: bool = os.getenv('DEBUG', 'False').lower() in ('true', '1', 'yes')
     
-    def validate(self) -> bool:
+    def validate(self) -> None:
         """
         Validate that required configuration values are present.
         
-        Returns:
-            bool: True if configuration is valid, False otherwise.
+        Raises:
+            ValueError: If required configuration values are missing.
         """
         if not self.api_key:
             raise ValueError(
                 "API_KEY is not set. Please set it in your .env file or environment variables."
             )
-        return True
 
 
 # Create a default config instance
